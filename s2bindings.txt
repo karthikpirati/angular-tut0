@@ -1,0 +1,161 @@
+Bindings :
+
+
+Binding is the process which forms the connection between the application UI and the data which comes from the business logic.
+ 
+ 
+In Angular, it can be called the automatic synchronization of the data and the view.
+
+
+1.{{ expression }}  
+
+These are the interpolation brackets which can be used to directly evaluate the expression and insert them into the HTML.
+
+
+2. () (parenthesis)
+
+These are used for the events which are raised from the elements. 
+Like click, DoubleClick, key up, key down, etc. 
+The () is then followed by = which will be a method in the component that will be called on the completion of the event.
+
+<html-element (event)="function in ts file"></html-element>
+
+3. [] (Square bracket)  
+
+The square brackets set the value from the component to the HTML element/DOM properties.
+
+
+
+In Angular, there are 3 types of bindings:
+
+a) Property Binding
+
+b) Event Binding
+
+c) Two-way Binding
+
+
+
+1. Property Binding :
+
+Property binding means we pass the data from the component class and set the value to the given element in the view.
+This is one way data binding that data is passed from the component to the view.
+
+consider this test component for below examples :
+
+test.ts
+export class TestComponent{
+imagePath:string="d:/images/test.png";
+course : string = 'Angular';
+
+logevent(event)
+  {
+   alert("Hi");
+  }
+}
+
+
+There are three ways by which we can achieve property binding :
+
+a) interpolation :
+
+examples : 
+
+test.html
+<span>{{1+2*3-5}}</span>
+<img src="{{imagePath}}">
+
+<h1 [innerHtml]='course'></h1>
+<h1>{{course}}</h1>
+
+
+imagePath is an property inside component  and and it will be assigned to the src of the image tag.
+
+
+2) using [] 
+
+Another commonly used method for binding is the use of square brackets. 
+With square brackets, we wrap the element property and assign the component property to this element property.
+
+<img [src]="imagepath" width="300px" height="150px" alt="image not found">
+
+
+3) Using "bind-" Prefix Before Element Property
+
+<img bind-src="imagepath" width="100px" height="100px" alt="image not found">
+
+
+
+Interpolation vs property binding :
+-------------------------------------
+
+
+Interpolation is a special syntax that Angular converts into property binding.It’s a convenient alternative to property binding.
+
+Let’s make the difference clear with an example: In the example below when we need to concatenate strings we have to use interpolation instead property bindi
+
+
+<img src='https://angular.io/{{imagePath}}'/>
+
+imagePath: string = 'assets/images/logos/angular/logo-nav@2x.png';
+
+to set an element property to a non-string data value, you must use property binding.
+
+<button [disabled]='isDisabled'>Try Me</button>
+isDisabled: boolean = true;
+
+If we decide to use interpolation instead of property binding, the button will always be disabled irrespective of isDisabled class property value is true of false.
+
+ <button disabled='{{isDisabled}}'>Try Me</button>
+ isDisabled: boolean = true;
+ 
+ 
+ Both Interpolation and Property Binding sanitizes the malicious content slightly differently, but protect us from malicious content by rendering it harmlessly.
+ 
+ <div [innerHtml]="badHtml"></div>'
+  badHtml: string = 'Hello <script>alert("You are just been Hacked or not");</script> first binding.';
+  
+  <div>{{hacked}</div>
+
+
+
+2. Event Binding :
+
+All the user interactions with the application happen through clicks, double clicks, or hovering or maybe some key actions such as keypress, key up, or key down.
+Generally, there will be the case where we will be calling some logic on these actions - that’s when event binding helps us.
+
+Event binding is the one-way data binding which sends the value from the view to the component, which is in contrast to the property binding where we used to send the data from component to the view.
+
+<button (click)="logevent()">Log</button>
+
+or 
+
+<button on-click="logevent()">Log</button>
+
+3.Here, whenever the button is clicked, the logevent method will call the logevent which will greet us with 'Hi.'
+
+These are the two ways to handle event binding. We can sum this up as:
+
+(): Wrap the event in parentheses and assign the method from the component.
+
+on-: Append on- before the event and assign the method from the component which will be called.
+
+
+3. Two-Way Binding :
+
+ Two-way binding is the combination of property binding [] and event binding ()
+ event binding () - will sends the data from UI(html) to component(ts)
+ property binding - will sends the data from componets to html.
+ 
+ user.html
+ <input type="text" name="username" [(ngModdel)]="username">
+ 
+ <span>Hello! {{username}}</span>
+ 
+ user.ts
+ username:string;
+ 
+ 
+
+
+

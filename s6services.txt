@@ -1,0 +1,23 @@
+Mainly purpose of Service is reuablity
+If we have any resuable code create the Service
+And we can reuse this in any component inside appliaction.
+
+
+
+Dependency Injection : 
+Instead of we creating objects the Angular creates the object for service 
+For that we have to keep @Injectable on top of Service
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthenticationService {
+}
+
+If we create service usinsg cli command it will take care of keeping this annotation
+
+ng g s "service-name" 
+
+By using constructor we can inject service inside component
+
+
+constructor(private authenticationService: AuthenticationService) {}

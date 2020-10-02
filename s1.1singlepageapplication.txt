@@ -1,0 +1,11 @@
+Angular is a Single Page Application
+
+A single-page application (SPA) is a website design approach with single DOM
+and manipulate the same DOM elements on the existing page itself when user routes to another page.
+
+In angular 
+Router Module
+<router-outlet> - to dynamically upload the new content
+
+Once inside of the SPA, the application is able to dynamically fetch content from the server 
+through AJAX/Http requests or websockets.

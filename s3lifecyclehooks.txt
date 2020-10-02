@@ -1,0 +1,113 @@
+A component instance has a lifecycle that starts when Angular instantiates the component class and 
+renders the component view along with its child views. 
+The lifecycle continues with change detection, as Angular checks to see when data-bound properties change,
+ and updates both the view and the component instance as needed. 
+The lifecycle ends when Angular destroys the component instance and removes its rendered template from the DOM. 
+Directives have a similar lifecycle, as Angular creates, updates, and destroys instances in the course of execution.
+
+
+After your application instantiates a component or directive by calling its constructor.
+Angular calls the hook methods you have implemented at the appropriate point in the lifecycle of that instance.
+
+Angular executes hook methods in the following sequence. You can use them to perform the following kinds of operations.
+
+Hook Method :
+1) ngOnChanges()
+
+Purpose:
+Respond when Angular sets or resets data-bound input properties. 
+The method receives a SimpleChanges object of current and previous property values.
+
+Note that this happens very frequently, so any operation you perform here impacts performance significantly. 
+
+Angular calls the ngOnChanges() method of a component or directive whenever it detects changes to the input properties.
+The onChanges example demonstrates this by monitoring the OnChanges() hook.
+
+ngOnChanges(changes: SimpleChanges) {
+  for (let propName in changes) {
+    let chng = changes[propName];
+    let cur  = JSON.stringify(chng.currentValue);
+    let prev = JSON.stringify(chng.previousValue);
+    this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+  }
+}
+
+
+@Input() hero: Hero;
+@Input() power: string;
+
+
+
+2) ngOnInit()
+
+Called once, after the first ngOnChanges().
+
+3) ngDoCheck()
+Called immediately after ngOnChanges() on every change detection run, and immediately after ngOnInit() on the first run.
+
+
+4) ngAfterContentInit()
+Called once after the first ngDoCheck().
+
+5) ngAfterContentChecked()
+Called after ngAfterContentInit() and every subsequent ngDoCheck().
+
+6) ngAfterViewInit()
+Called after the ngAfterViewInit() and every subsequent ngAfterContentChecked().
+
+
+ngDestroy() : 
+
+Called immediately before Angular destroys the directive or component.
+
+Put cleanup logic in ngOnDestroy(), the logic that must run before Angular destroys the directive.
+
+This is the place to free resources that won't be garbage-collected automatically. 
+You risk memory leaks if you neglect to do so.
+
+Unsubscribe from Observables and DOM events.
+Stop interval timers.
+Unregister all callbacks that the directive registered with global or application services.
+The ngOnDestroy() method is also the time to notify another part of the application that the component is going away.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The Constructor is a default method of the class that is executed when the class is instantiated.
+Constructor ensures proper initialization of fields (class members) in the class and its subclasses.
+Angular Dependency Injector (DI) analyse the constructor parameters.
+When we call new MyClass() it creates a new instance of the class.
+While calling new MyClass() we must have to pass the exact match of the parameters type to the constructor of the class, example:
+new MyClass(arg1:number, arg2:string, argN:any)
+These arg1:number, arg2:string, argN:any, must be of same type defined in constructor of class MyClass.
+
+
+
+ngOnInit is a life cycle hook called by Angular to indicate that the Angular is done creating the component.
+In order to use OnInit we have to import it in the component class like this:
+import {Component, OnInit} from '@angular/core';
+Actually implementing OnInit in every component is not mandatory. But considered good practice.
+A class implements OnInit like this:
+export class AppComponent implements OnInit { }
+
+
+
+We use constructor() for all the initialization/declaration.
+It’s better to avoid writing actual work in the constructor.
+The constructor() should only be used to initialize class members but shouldn't do actual "work".
+So we should use constructor() to setup Dependency Injection, Initialization of class fields etc.
+ngOnInit() is a better place to write "actual work code" that we need to execute as soon as the class is instantiated.
+Like loading data from Database — to show the user in your HTML template view. Such code should be written in ngOnInit().

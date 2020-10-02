@@ -1,0 +1,191 @@
+<!--
+    CSS -Cascading Style Sheets 
+    CSS can be added to HTML documents in 2 ways:
+
+    1) Inline - by using the style attribute inside HTML elements
+    2) External - by using CSS file.
+    
+
+-->
+
+<!-- 
+    Inline CSS :
+    An inline CSS is used to apply a unique style to a single HTML element.
+    An inline CSS uses the style attribute of an HTML element.
+
+    examples :
+
+    <h1 style="color:blue;">A Blue Heading</h1>
+    <p style="color:red;">A red paragraph.</p>
+
+    below is an inline style applying to an element using style attribute as below
+    below styles will be applied only for below span element
+-->
+
+
+<!--
+        Before starting we will understand some commonly used CSS properties
+
+        1) difference between CSS margin and padding
+        margin : applies the margin or some space around the HTML element
+        padding : applies the margin or some space within the HTML element
+
+        2) 
+
+-->
+<span style="display: block;
+height: 82px;
+margin-left: 64px;
+width: 265px;
+margin-top: 62px;
+border: 2px solid black;">
+    Main Block using inline CSS
+</span>
+
+<!--
+    External CSS :
+
+    An external style sheet is used to define the style for many HTML elements inside the component
+    Current componet is already linked to external style sheet attribute-directives.component.css
+    All the external styles will be available inside that file
+
+    using class and id attributes we can apply external css and we can reapply these styles for other elements
+
+    1) Reusable style using class attribute :
+
+    Main purpose of styles using class attribute is reusability
+    we have defined lot of css classes like main-block ,main-block-font, sub-block etc
+    these styles can be applied to multiple html elements as below
+
+    <div class="main-block">
+    </div>
+    <div class="main-block">
+    </div>
+
+    2) Common Styles :
+    
+    if you want apply some common css for an specific HTML element.
+
+    let say if you want appy some styles common for all the input element used in whole application 
+    define them in main style sheet in the angular application called "style.css"
+    example :
+    go to style.css
+    input{
+        width : 2rem;
+        height : 1rem;
+    }
+
+    3) 
+
+
+
+    
+-->
+
+<!--
+    if you look at main-block
+    it has a CSS property margin-left : means it leave some space from left and moves to right
+    Each CSS we applied to this element will took effective based on the parent element
+
+-->
+<span class="main-block">
+    Main Block using external CSS
+</span>
+
+<span class="main-block main-block-font">
+    Applying multiple styles using external CSS
+</span>
+
+<!--
+    inside we have three div's
+
+    one Parent div and to child div's
+    if any margin we applied to child div's
+    child's will take margin from parent div not from document/window  
+-->
+<div class="login-form">
+    <div class='div-xs'>
+        <input type="text" />
+    </div>
+    <div class='div-xs'>
+        <input type="password" />
+    </div>
+</div>
+
+<div class='div-xs'>
+    <input type="text" />
+</div>
+
+
+
+<!--
+    to apply the style in angular/html there is a attribute called style
+    but these styles are not dynamic once we apply they will not change
+    what if we want to change styles dynamically
+    we can property binding using style attribute
+-->
+<!--
+    [style.css-attribute]='value'
+    
+
+-->
+
+<p style="color:blue;margin-left:20px">Applying styles using style attribute</p>
+
+<p [style.color]='color' [style.margin-left.px]='marginLeft' [style.background-color]='backgroundColor'>
+    Apply styles using property binding of angular
+</p>
+
+<!--
+    multiple styles with condition
+-->
+
+<p [style.background-color]='isValid ? "green" : "red" ' [style.margin-left.px]='isValid ? 20 : 30'>
+    Apply styles using property binding of angular
+</p>
+
+<!--
+    instead of applying multiple styles we can apply all the styles using ngStyle
+    ngStyle accepts the object with key value pairs
+    key is css attribute and value is attribute value
+
+    so pass the data as object using {}
+-->
+
+<p [ngStyle]="{'color':color,'margin-left':marginLeft,'background-color':backgroundColor}">
+    Applying multiple styles using ngStyle
+</p>
+
+
+<!--
+    we can ngStyle to apply multiple styles based on some condtion
+
+    if we have just condtions like yes or no , true or false then use '?' operator
+    else call funcion from ts and get all whole style object
+-->
+
+<div class="row">
+    <p [ngStyle]="isValid ?{'background-color':'red'}:{'background-color':'green'}">Changing color based on condition
+    </p>
+</div>
+
+
+<ul *ngFor="let country of countries">
+    <li [ngStyle]="{'color' : getStyles(country)}">{{country}}</li>
+</ul>
+
+
+<!--
+
+    syntax :
+<some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+<some-element [ngClass]="'first second'">...</some-element>
+<some-element [ngClass]="['first', 'second']">...</some-element>
+<some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+<some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
+-->
+
+<span class="main-block main-block-color">Main Block</span>
+<span class="sub-block sub-block-color">predefined multiple classes 1</span>
+
+<span [ngClass]="getClasses()">multiple classes based on some functions</span>

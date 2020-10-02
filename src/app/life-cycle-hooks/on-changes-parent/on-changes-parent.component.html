@@ -1,0 +1,37 @@
+<input type="text" name="course" [(ngModel)]="course"/>
+<app-on-changes [course]="course"></app-on-changes>
+
+
+
+<p style="background-color:mediumpurple;color:wheat" #pRef>
+    Styled inline!
+  </p>
+
+<p [style.font-size.em]="2"  
+  [style.background-color]="'coral'"  
+  [style.color]="'ivory'"> Test1
+</p>
+
+<p [ngStyle] = "{
+    'font-size.em': 2,
+    'background-color': 'rebeccapurple',
+    'color': 'seashell'
+  }">Test 2
+  </p>
+
+  <div class="row">
+<span [ngStyle]="{'color':getColor(),'font-size.px':24,'font-weight':800}">Testing Attribute directive</span>
+</div>
+<div class="row">
+<span [ngStyle]="getStyles()">Testing Attribute directive ngStyle usinh class method</span>
+</div>
+<div class="row">
+<span [ngClass]="getClasses()">Testing Attribute ngClass directive</span>
+
+<span [ngClass]="isValid ? 'app-success-color' : 'app-danger-color'">Testing Attribute ngClass directive</span>
+
+
+<span [ngClass]="{
+    active : isValid
+}">Testing Attribute ngClass directive</span>
+</div>

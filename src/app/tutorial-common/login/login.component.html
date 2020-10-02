@@ -1,0 +1,26 @@
+<p>login works!</p>
+
+
+<form [formGroup]="loginForm">
+    <div class="form-group"  *ngIf="isInvalidUser">
+            <span class="invalid-user">{{message}}</span>
+    </div>
+    <div class="userFormMargin">
+        <label class="col-sm-2">UserName :</label>
+        <mat-form-field class="example-full-width col-sm-5" appearance="outline" >
+            <mat-label>FirstName</mat-label>
+        <input matInput type="text" formControlName ="username"/>
+        </mat-form-field>
+    </div>
+    <div class="userFormMargin">
+        <label class="col-sm-2">Password :</label>
+        <mat-form-field class="example-full-width col-sm-5" appearance="outline">
+            <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName ="password"/>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <button class="col-sm-2" (click)="submit()">Submit</button>
+        <button class="col-sm-2" (click)="signUp()">If New User Sign Up</button>
+    </div>
+</form>

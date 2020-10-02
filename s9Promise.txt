@@ -1,0 +1,101 @@
+let promise = new Promise(function(resolve, reject) {
+  // executor (the producing code, "singer") - our own code written to produce some result
+});
+
+
+The function passed to new Promise is called the executor
+When new Promise is created, the executor runs automatically.
+This function contains the code to produce/publish some data
+
+Its arguments resolve and reject are callbacks provided by JavaScript itself. 
+Our code is only inside the executor.
+
+resolve(value) — if the job finished successfully, with result value.
+reject(error) — if an error occurred, error is the error object.
+
+
+The promise object returned by the new Promise constructor has these internal properties:
+
+1) state — 
+
+a) initially value of state is "pending"
+b) When resolve is called it changes to "fulfilled" 
+c) when reject is called state value changes to "rejected"
+
+2) result
+
+a) initially value of result is undefined
+b) When resolve(value) is called it changes to value which we pushed 
+c) when reject is called state value changes to error
+
+
+
+// Below we are pushing the value done
+let promise = new Promise(function(resolve, reject) {
+  // the function is executed automatically when the promise is constructed
+
+  // after 1 second signal that the job is done with the result "done"
+  setTimeout(() => resolve("done"), 1000);
+});
+
+
+We can see two things by running the code above:
+
+The executor is called automatically and immediately (by new Promise).
+
+The executor receives two arguments: resolve and reject. 
+These functions are pre-defined by the JavaScript engine, so we don’t need to create them. 
+We should only call one of them when ready.
+
+After one second of “processing” the executor calls resolve("done") to produce the result. 
+This changes the state of the promise object to done.
+
+
+
+let promise = new Promise(function(resolve, reject) {
+  // after 1 second signal that the job is finished with an error
+  setTimeout(() => reject(new Error("Whoops!")), 1000);
+});
+
+
+The executor should call only one resolve or one reject. Any state change is final.
+
+All further calls of resolve and reject are ignored:
+
+let promise = new Promise(function(resolve, reject) {
+  resolve("done");
+
+  reject(new Error("…")); // ignored
+  setTimeout(() => resolve("…")); // ignored
+});
+
+
+
+The properties state and result of the Promise object are internal. 
+We can’t directly access them. 
+We can use the methods .then/.catch/.finally for that. They are described below.
+
+
+let promise = new Promise(function(resolve, reject) {
+  setTimeout(() => resolve("done!"), 1000);
+});
+
+// resolve runs the first function in .then
+promise.then(
+  result => console.log(result), // shows "done!" after 1 second
+  error => console.log(error) // doesn't run
+);
+
+
+let promise = new Promise(function(resolve, reject) {
+  setTimeout(() => reject(new Error("Whoops!")), 1000);
+});
+
+// reject runs the second function in .then
+promise.then(
+  result => console.log(result), // doesn't run
+  error => console.log(error) // shows "Error: Whoops!" after 1 second
+);
+
+
+-----------------------------------------------------------------------------

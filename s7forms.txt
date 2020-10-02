@@ -1,0 +1,10 @@
+There are two types of forms in Angular
+
+1) Template Driven Forms :
+  a) import {FormsModule} from '@angular/forms'
+  b) To bind the data we use ngModel
+ 
+2) Reactive Forms - 
+  a) import {ReactiveFormsModule} from '@angular/forms'
+  b) To bind the data we use FormGroup with formControlName or just FormControl
+  3) FormGroup is a object that groups all FormControl objects

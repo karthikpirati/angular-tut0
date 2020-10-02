@@ -1,0 +1,62 @@
+There are three kinds of directives in Angular:
+
+1) Components —directives with a template.
+2) Structural directives — change the DOM layout by adding and removing DOM elements. 
+Structural directives are responsible for HTML layout. 
+They shape or reshape the DOM's structure, typically by adding, removing, or manipulating elements.
+
+examples : ngIf(add and removes the element) , ngFor (add and removes the elements) , ngSwitch (adds and removes the elements)
+
+3) Attribute directives—change the appearance or behavior of an element, component, or another directive.
+examples : ngStyle , ngClass
+
+
+custom ngIf:
+
+
+Example :
+
+custom MyIfDirective :
+
+to create that use below command
+
+ng g d mf-if
+
+import { Directive, Input, ElementRef, TemplateRef, ViewContainerRef } from '@angular/core';
+
+@Directive({
+  selector: '[myIf]'
+})
+export class MyIfDirective {
+
+  constructor(
+    private element: ElementRef,
+    private templateRef: TemplateRef<any>,
+    private viewContainer: ViewContainerRef
+  ) {
+  }
+
+  @Input()
+  set myIf(val) {
+    if(val) {
+      this.viewContainer.createEmbeddedView(this.templateRef);
+    } else {
+      this.viewContainer.clear();
+    }
+  }
+}
+
+
+Use this directive wherver you need
+
+test-component.html
+<div *myIf="isVisible">
+    Hi there!
+</div>
+
+
+test-component.ts
+isVisible =true; // try with false
+
+
+

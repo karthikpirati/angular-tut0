@@ -1,0 +1,17 @@
+
+There are two ways to share data between components
+
+1) If there is Parent-Child relationship between components then we can use @Input and @Output
+
+@Input - to pass the data from parent to child using property binding [].
+@Output - to send the response back to parent using Event binding () and EventEmitter.emit()
+
+2)If there is no Parent-Child relationship between components then use
+
+Subject/Behaviour Subject with Observable.
+
+Subject acts like a publisher and subscriber so from 
+one component we can push data subject.next(data we want to send)
+and we can subscribw to this from as many components as we can.
+
+check rxjs module for more details

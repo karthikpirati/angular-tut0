@@ -1,0 +1,83 @@
+
+1) 
+Observables can handle multiple events at a time
+
+ const sequence:Observable;
+getData(key){
+	this.sequence = new Observable(
+		observer => {
+		observer.next(1);
+		observer.next(2);
+		observer.next(3);
+		observer.complete();
+			}
+	);
+}
+	
+now whoever subscribe to that Observable will gets notifications at a time
+Means it can handle multiple events at a time/for new notification/for new data pushed
+
+event1 :
+sequence.subscribe();
+
+event2 :
+sequence.subscribe();
+
+event3 :
+sequence.subscribe();
+
+Promises can handle one event at a time
+
+getData(key){
+	new Promise(
+			if(key){
+				resolve('some data')
+			}else{
+				reject('no data found')
+			}
+	)
+}
+	
+First it completes event1 followed by event2
+
+event1 :	
+this.getData(1).then(
+	resp => console.log(resp),
+	err => console.log(err)
+)
+
+event2 : 
+this.getData(2).then(
+	resp => console.log(resp),
+	err => console.log(err)
+)
+-----------------------------------------------------------
+2) Observable are unsusscribable where as we promises are not
+we can unsusscribe from a observable when not needed by 
+	sub : Subscribtion 
+	this.sub = this.http.get().subscribe();
+	
+	unsusscribe by using
+	
+	this.sub.unsusscribe()
+
+----------------------------------------------------------------
+let say we have two http calls where one call is dependent on each other 
+then we can go with asyn await with promise
+as we discussed by default all http calls are asynchronous and return Observables
+asynchronous means they wont wait for call to complete
+
+common.service.ts : 
+getData1(){
+return this.http.get('');
+}
+
+getData2(){
+return this.http.get('');
+}
+
+getData2 is dependent on getData1
+
+in this we have to write code as below
+
+	this.commonService.get

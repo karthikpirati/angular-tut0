@@ -1,0 +1,54 @@
+.main-block{
+    display: block;
+    height: 82px;
+    margin-left: 64px;
+    width: 265px;
+    margin-top: 62px;
+    border: 2px solid black;
+    }
+    
+    .main-block-font{
+        font-weight: 800;
+        font-size: large;
+        font-style: italic;
+    }
+    
+    .sub-block-font{
+        font-weight: 500;
+        font-size: medium;
+    }
+    
+    #main-block3 .main-block3{
+        display: block;
+        height: 82px;
+        margin-left: 64px;
+        width: 265px;
+        margin-top: 62px;
+        border: 2px solid blue; 
+    }
+    
+    .div-xs{
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+    
+    .div-md{
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+    
+    
+    
+    input{
+        width: 15rem;
+        height: 1.3rem;
+    }
+    
+    .login-form{
+        margin-top: 2%;
+    margin-left: 12%;
+    height: 7rem;
+    border: 1px solid violet;
+    width: 50%;
+    }
+    

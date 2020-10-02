@@ -1,0 +1,144 @@
+
+<div style="margin-left:10px;margin-right:10px">
+    <form [formGroup]="userForm">
+        <div class="userFormMargin row" *ngIf="!isSuccess">
+            <div style="color:red; justify-content: center;">Some Error Occured</div>
+        </div>
+        <div class="userFormMargin">
+            <label class="col-sm-2">FirstName :</label>
+            <mat-form-field class="example-full-width col-sm-5" appearance="outline">
+                <mat-label>FirstName</mat-label>
+            <input matInput type="text" formControlName="firstName" (change)="fnChange($event.target.value)">
+            </mat-form-field>
+           <span class="col-sm-4" *ngIf="userForm.get('firstName').dirty && userForm.get('firstName').errors && userForm.get('firstName').errors.required">
+            FirstName is required
+           </span> 
+        </div>
+        
+    
+        <div class="userFormMargin">
+            <label class="col-sm-2">LastName : </label>
+            <mat-form-field class="example-full-width col-sm-5" appearance="outline">
+                <mat-label>LastName</mat-label>
+            <input matInput type="text" formControlName="lastName">
+            </mat-form-field>
+            <span class="col-sm-4" *ngIf="userForm.get('lastName').dirty && userForm.get('lastName').errors && userForm.get('lastName').errors.required">
+                LastName is required
+            </span> 
+        </div>
+        <div class="userFormMargin">
+            <label class="col-sm-2">Pass : </label>
+            <mat-form-field class="example-full-width col-sm-5" appearance="outline">
+                <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+            </mat-form-field>
+            <span class="col-sm-4" *ngIf="userForm.get('password').dirty && userForm.get('password').errors && userForm.get('password').errors.required">
+                Password is required
+               </span> 
+        </div>
+        <div class="userFormMargin">
+            <label class="col-sm-2">Confirm Pass : </label>
+            <mat-form-field class="example-full-width col-sm-5" appearance="outline">
+                <mat-label>Conf Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+            </mat-form-field>
+            <span class="col-sm-4" *ngIf="userForm.get('confirmPassword').dirty && userForm.get('confirmPassword').errors && userForm.get('confirmPassword').errors.required">
+                Conf Password is required
+               </span> 
+        </div>
+        <div class="userFormMargin">
+            <label class="col-sm-2">Email : </label>
+            <mat-form-field class="example-full-width col-sm-5" appearance="outline">
+                <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            </mat-form-field>
+            <span class="col-sm-4"
+                *ngIf="userForm.get('email').dirty && userForm.get('email').errors && userForm.get('email').errors.invalidEmail">
+                Email is invalid
+            </span>
+        </div>
+        <div class="userFormMargin">
+            <label class="col-sm-2">Mobile No : </label>
+            <mat-form-field class="example-full-width col-sm-5" appearance="outline">
+                <mat-label>Mobile No</mat-label>
+            <input matInput type="text" formControlName="mobileNo">
+            </mat-form-field>
+            <span class="col-sm-4" *ngIf="userForm.get('mobileNo').dirty && userForm.get('mobileNo').errors && userForm.get('mobileNo').errors.required">
+                Mobile No is required
+            </span> 
+        </div>
+    
+    
+        <!-- <div>
+            <label class="col-sm-2">Yes : </label>
+            <input type="checkbox" [checked]="userForm.get('confirm').value==='yes'" formControlName="confirm"/>
+            <label class="col-sm-2">No : </label><input type="checkbox" [checked]="userForm.get('confirm').value==='no'" formControlName="confirm"/>
+        </div> -->
+    
+        <div class="userFormMargin">
+            <label class="col-sm-2">DOB : </label>
+            <mat-form-field class="example-full-width col-sm-5" appearance="outline">
+                <mat-label>FirstName</mat-label>
+            <input matInput type="date" formControlName="dob">
+            </mat-form-field>
+            <span class="col-sm-4" *ngIf="userForm.get('firstName').dirty && userForm.get('firstName').errors && userForm.get('firstName').errors.required">
+                FirstName is required
+               </span> 
+        </div>
+        <div class="userFormMargin">
+            <label class="col-sm-2">States : </label>
+            <!-- <select formControlName="state" (change)="stateChange()">
+                <option *ngFor="let state of states" [value]="state.key">{{state.value}}</option>
+            </select> -->
+    
+            <mat-form-field appearance="outline" class="col-sm-5">
+                <mat-label>States</mat-label>
+                <select matNativeControl formControlName="state" (change)="stateChange()">
+                    <option *ngFor="let state of states" [value]="state.key">{{state.value}}</option>
+                </select>
+              </mat-form-field>
+        </div>
+        
+    
+        <button class="btn btn-primary" (click)="signUp()" [disabled]="userForm.invalid">{{action}}</button>
+    </form>
+    </div>
+    <!-- 
+    <div>
+        <label>Yes : </label><input type="checkbox" [checked]="confirm==='yes'" (change)="confirmChange($event.target.checked)"/>
+        <label>No : </label><input type="checkbox"[checked]="confirm==='no'" (change)="confirmChange($event.target.checked)"/>
+    </div>
+    
+    <app-table [userList]="users" (deleteUser)="deleteUser($event)"></app-table> -->
+    
+    <!--
+    
+        class FormGroup{
+            value : 
+        }
+    
+        class FormControl{
+            touched : boolean;
+            dirty : boolean;
+            errors
+            value :
+        }
+    
+        class Errors {
+            required : true
+            minlength : false
+            maxlength
+            inValidEmail : 
+        }
+    
+        firstName :  {
+        touched : false
+        dirty : false 
+        errors : {
+            required
+            minlength
+            maxlength
+        }
+        invalid : boolean
+    }
+    -->

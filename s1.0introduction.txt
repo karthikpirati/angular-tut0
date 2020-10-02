@@ -1,0 +1,14 @@
+first step is to install angular cli :
+
+go to root directory and install angular cli with below command
+>npm install -g @angular/cli
+
+choose any folder in your system and create angular application by below command
+> ng new "your app name "
+
+to start applicatio go inside project folder
+> cd "your app name "
+
+> ng serve
+
+your application will starts on default port http://localhost:4200

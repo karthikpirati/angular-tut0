@@ -1,0 +1,6 @@
+<mat-card class="example-card">
+    <button class="btn btn-primary" (click)="create()">Create</button>
+</mat-card>
+
+
+<app-table [userList]="users" (deleteUser)="deleteUser($event)" (editUser)="editUser($event)"></app-table>

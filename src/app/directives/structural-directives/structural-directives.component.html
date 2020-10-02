@@ -1,0 +1,101 @@
+
+<h1>Structural Directives</h1>
+
+<!-- 
+    ngIf is astructural directive that creates and remove the same element from the DOM based on condition
+
+    if condition is true - it will creates the same element on the DOM
+    if condition is true - it will removes the same element on the DOM
+
+    let say based on the user roles we have to show and hide the certain piece of html we can do that using ngIf
+
+    in real time usually login users have three roles admin role,user role and support role
+
+    we have to give access to user based on their roles
+    Access means sometimes they have to see some screens or some buttons
+
+    if loggedin user has either admin role or user role then create the div
+    for support user div will be deleted and he wont be able to see the div
+
+    if loggedin user has either admin role then only allow him to save the details to the database
+ -->
+
+<h3>ngIf - adds and removes same element based on condition</h3>
+<div *ngIf="isAdmin || isUser"> <!-- or you replace this as <div *ngIf="!isSupport">-->
+    <form>
+    <input type="text" name="course" [(ngModel)]="courseForm.course" placeholder="course">
+
+    <button *ngIf="isAdmin" (click)="save()">Save/Update</button>
+    </form>
+</div>
+
+<!--
+    *ngFor is used to create or remove the multiple elements
+    *ngFor is like for loop in javascript
+    it loops through the array and based on size of array it will create the number of elements
+    and binds the value inside array to created element
+
+    Let say we want to display of list of course a institute offer by using dropdown
+    
+    
+-->
+
+<!-- based on number of courses ngFor will creates the option elements and binds course value to each option-->
+    <h3>ngFor - add and remove multiple elements based on condition</h3>
+    <h3>Using ngFor with select dropdowns</h3>
+    <!-- <div class="row">
+    <select>
+        <option *ngFor="let course of courses">{{course}}</option>
+    </select>
+    </div> -->
+
+    <!--
+        due to memeory constraints in database we will store whole value in database
+        let say SpringBoot will be stored with id:2 in db
+        but we have to show Spring Boot to user but not value 2
+        in these cases we will get/we have to prepare data as below
+        {'id':1,'value':'Java8'},
+        {'id':2,'value':'Spring Boot'},
+        {'id':3,'value':'Hibernate'},
+        {'id':4,'value':'Angular'}
+
+        the value which we want to send to datbase has to bind to [value] attribute of option
+        and for the user to understand and select we have to display value using {{}}
+
+        by using ngModel we will bind selected courseid to a variable in the component
+        in this case we are using selectedCourseId as a variable in compoent to bind selected courseid
+    -->
+    <div class="row" style="margin-top:2rem">
+    <select [(ngModel)]="selectedCourseId" (ngModelChange)="onCourseChange()">
+        <option *ngFor="let course of coursesWithIds" [value]="course.id">{{course.course}}</option>
+    </select>
+    </div>
+    
+    <h3>Using ngFor with underlined list </h3>
+    <!-- <ul>
+        <li *ngFor="let course of courses">{{course}}</li>
+    </ul> -->
+
+    <ul>
+        <li *ngFor="let course of coursesWithIds" (click)="onCourseClick(course?.id)">{{course.course}}</li>
+    </ul>
+
+
+    <!--
+        ngSwitch - like a switch case
+        if you observe in dropdown above when we are selecting some value id is binding to selectedCourseId property in ts
+        ngSwitch binds to this selectedCourseId
+        if selectedCourseId is 1 it will only show the div with *ngSwitchCase=1
+    -->
+    <h3>ngSwitch</h3>
+    <h3>ngSwitch will displays the specific course you selected on top</h3>
+    <div class="row" style="margin-top:2rem">
+        <div [ngSwitch]="selectedCourse?.course">
+            <div *ngSwitchCase="'Jav8'">Jav8</div>
+            <div *ngSwitchCase="'Spring Boot'">Spring Boot</div>
+            <!-- <div *ngSwitchCase="'Hibernate'">Hibernate</div> -->
+            <div *ngSwitchCase="'Angular'">Angular</div>
+            <div *ngSwitchDefault>No Course Selected</div>
+            
+        </div>
+    </div>

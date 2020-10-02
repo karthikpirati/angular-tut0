@@ -1,0 +1,77 @@
+<!--
+    In a reactive form, the source of truth is the component class. Instead of adding validators through attributes in the template, you add validator functions directly to the form control model in the component class. 
+    Angular then calls these functions whenever the value of the control changes.
+
+Validator functions : 
+Validator functions can be either synchronous or asynchronous.
+
+Sync validators:
+Synchronous functions that take a control instance and immediately return either a set of validation errors or null. 
+You can pass these in as the second argument when you instantiate a FormControl.
+
+Async validators: 
+Asynchronous functions that take a control instance and return a Promise or Observable 
+that later emits a set of validation errors or null. 
+You can pass these in as the third argument when you instantiate a FormControl.
+-->
+
+<h1>reactive Forms</h1>
+<form [formGroup]="userForm">
+    <div>
+        <label class="col-sm-1">FirstName :</label>
+        <mat-form-field class="example-full-width col-sm-3" appearance="outline">
+            <mat-label>FirstName</mat-label>
+        <input matInput type="text" formControlName="firstName" (change)="fnChange($event.target.value)">
+        </mat-form-field>
+       <span class="col-sm-4" *ngIf="userForm.get('firstName').errors && userForm.get('firstName').errors.required">
+        FirstName is required
+       </span> 
+    </div>
+    
+
+    <div>
+        <label class="col-sm-1">LastName : </label>
+        <mat-form-field class="example-full-width col-sm-3" appearance="outline">
+            <mat-label>FirstName</mat-label>
+        <input matInput type="text" formControlName="lastName">
+        </mat-form-field>
+    </div>
+    <div>
+        <label class="col-sm-1">Pass : </label>
+        <mat-form-field class="example-full-width col-sm-3" appearance="outline">
+            <mat-label>FirstName</mat-label>
+        <input matInput type="password" formControlName="password">
+        </mat-form-field>
+    </div>
+</form>
+
+<!--
+
+    class FormGroup{
+        value : 
+    }
+
+    class FormControl{
+        touched : boolean;
+        dirty : boolean;
+        errors
+    }
+
+    class Errors {
+        required : true
+        minlength : false
+        maxlength
+        inValidEmail : 
+    }
+
+    firstName :  {
+    touched : false
+    dirty : false 
+    errors : {
+        required
+        minlength
+        maxlength
+    }
+    invalid : boolean
+}
+-->

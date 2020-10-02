@@ -1,0 +1,11 @@
+We can keep everything(componets,Directives,Pipes etc) in root module called app module
+As our application grows it become bulky and difficult to maintain
+
+To organize the code we have to split the project code into modules according to fuctionality
+
+In this tutorial project i have created several feature modules according to concept
+
+To explain 
+ Forms - > AppFormsModule,
+ Diretives -> DirectivesModule,
+ User Functionality -> UsersModules etc

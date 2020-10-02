@@ -1,0 +1,11 @@
+.app-text-color{
+    color:white;
+}
+
+.app-success-color{
+    background-color: green;
+}
+
+.app-danger-color{
+    background-color: red;
+}

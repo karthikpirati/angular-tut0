@@ -1,0 +1,62 @@
+
+// ngrx starts
+npm i @ngrx/store @ngrx/effects @ngrx/store-devtools @ngrx/schematics --save
+
+ng config cli.defaultCollection @ngrx/schematics
+
+ng generate store AppState --root --module app.module.ts
+
+ng generate action actions/name
+
+ng generate effect effects/name --root -m app.module.ts
+
+But there is a small (big) problem! As of ngrx version 6 `store.select` is deprecated, the new way is to use `store.pipe(select….`
+
+// ngrx ends 
+ng g class models/customer
+
+ng g d directive name
+
+//angular materal
+ng add @angular/material
+
+//for resizable table
+
+npm install angular-table-resize
+
+
+To create the component inside:
+
+ng g component foldername/component --module=module name
+
+example :
+
+for demostrating life cycle hooks i am creating a module called life-cycle-hooks
+
+ng g m life-cycle-hooks
+
+and i want to create a component called on-chnages inisde life-cycle-hooks module.
+
+ng g c life-cycle-hooks/on-changes --module=life-cycle-hooks
+
+
+angyular app with boostrap :
+
+npm install bootstrap
+
+
+
+ngx translation :
+
+npm install @ngx-translate/core @ngx-translate/http-loader rxjs --save
+
+TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
+		
+		
+		
