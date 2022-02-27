@@ -1,0 +1,170 @@
+ng-template.component.html
+
+<p>ng-template works!</p>
+
+
+<ng-template>
+    <button class="tab-button" 
+                  (click)="login()">{{loginText}}</button>
+          <button class="tab-button" 
+                  (click)="signUp()">{{signUpText}}</button>
+</ng-template>
+
+
+If you try the example above,
+ you might be surprised to find out that this example does not render anything to the screen!
+
+ This is normal and it's the expected behavior. 
+ This is because with the ng-template tag we are simply defining a template, but we are not using it yet.
+
+
+ Let's then find an example where we can render an output, using some of the most commonly used Angular directives.
+
+
+ The ng-template directive and ngIf:
+ -------------------------------------
+You probably came across ng-template for the first time while implementing an if/else scenario 
+such as for example this one:
+
+<div class="lessons-list" *ngIf="lessons else loading">
+  ... 
+</div>
+
+<ng-template #loading>
+    <div>Loading...</div>
+</ng-template>
+
+
+This is a very common use of the ngIf/else functionality: 
+we display an alternative loading template while waiting for the data to arrive from the backend.
+
+As we can see, the else clause is pointing to a template, which has the name 'loading'. 
+The name was assigned to it via a template reference, using the #loading syntax.
+
+But besides that else template ,internally ngIf will be converted to ng-template! 
+Let's have a look at what is happening under the hood:
+
+<ng-template [ngIf]="lessons" [ngIfElse]="loading">
+   <div class="lessons-list">
+     ... 
+   </div>
+</ng-template>
+
+<ng-template #loading>
+    <div>Loading...</div>
+</ng-template>
+
+the element onto which the structural directive ngIf was applied has been moved into an ng-template
+The expression of *ngIf has been split up and applied to two separate directives,
+ using the [ngIf] and [ngIfElse] template input variable syntax
+
+
+ Multiple Structural Directives:
+
+ Let's see what happens if for example we try to use ngIf and ngFor in the same element:
+
+ <div class="lesson" *ngIf="lessons" 
+       *ngFor="let lesson of lessons">
+    <div class="lesson-detail">
+        {{lesson | json}}
+    </div>
+</div>
+
+This would not work! Instead, we would get the following error message:
+
+Uncaught Error: Template parse errors:
+Can't have multiple template bindings on one element. Use only one attribute 
+named 'template' or prefixed with *
+
+This means that its not possible to apply two structural directives to the same element. 
+In order to do so, we would have to do something similar to this:
+
+<div *ngIf="lessons">
+    <div class="lesson" *ngFor="let lesson of lessons">
+        <div class="lesson-detail">
+            {{lesson | json}}
+        </div>
+    </div>
+</div>
+
+In this example, we have moved the ngIf directive to an outer wrapping div,
+ but in order for this to work we have to create that extra div element.
+
+ This solution would already work, but is there a way to apply a structural directive
+  to a section of the page without having to create an extra div element?
+
+
+  Yes and that is exactly what the 'ng-container' structural directive allows us to do!
+
+
+
+The ng-container directive:
+---------------------------------
+In order to avoid having to create that extra div, we can instead use ng-container directive:
+
+
+<ng-container *ngIf="lessons">
+    <div class="lesson" *ngFor="let lesson of lessons">
+        <div class="lesson-detail">
+            {{lesson | json}}
+        </div>
+    </div>
+</ng-container>
+
+
+Dynamic Template Creation with the ngTemplateOutlet directive:
+--------------------------------------------------------------
+
+By using ngTemplateOutlet we can reuse same template multiple times in same page 
+
+
+Being able to create template references and point them to other directives such as ngIf is just the beginning.
+
+We can also take the template itself and instantiate it anywhere on the page,
+ using the ngTemplateOutlet directive:
+
+ <ng-container *ngTemplateOutlet="loading"></ng-container>
+
+
+ We can see here how ng-container helps with this use case: 
+ we are using it to instantiate on the page the loading template that we defined above.
+
+
+ We are refering to the loading template via its template reference #loading,
+  and we are using the ngTemplateOutlet structural directive to instantiate the template.
+
+
+We could add as many ngTemplateOutlet tags to the page as we would like, 
+and instantiate a number of different templates. 
+The value passed to this directive can be any expression that evaluates into a template reference, more on this later.
+
+
+Template Context:
+One key question about templates is, what is visible inside temlate reference?
+Does the template have its own separate variable scope, what variables can the template see?
+
+
+Inside the ng-template tag body, 
+we have access to the same context variables that are visible in the outer template, 
+such as for example the variable lessons.
+
+
+for example if ts file is having property lessons it cannot be visible inside ng-templte
+so for that we have to pass data to template by using ngTemplateOutletContext
+
+
+<ng-container [ngTemplateOutlet]="display" [ngTemplateOutletContext]="{lessons : lessons}"></ng-container>
+
+
+<b>Ng Template by default load anything until it is created by ngIf or NgTemplateOutlet</b>
+<ng-template #display let-lessons="lessons">
+    <p>Inside Template Reference</p>
+    <div *ngFor="let lesson of lessons">
+        {{lesson}}
+    </div>
+</ng-template>
+
+
+
+
+

@@ -21,7 +21,28 @@ export class UserComponent implements OnInit {
   users : User[] = [];
   userSubscription : Subscription;
 
- 
+/*
+  headerData = ["FirstName","LastName","DOB"]
+  data : [
+    {firstName : '',lastName : '', dob : ''},
+    {firstName : '',lastName : '', dob : ''},
+    {firstName : '',lastName : '', dob : ''},
+  ]
+
+  dataToFetch =["Title","Description","Image"]
+
+  ----------------------------------------------------------
+
+  data : [
+    {title: '', description :'', img : ''},
+    {title: '', description :'', img : ''},
+    {title: '', description :'', img : ''},
+  ]
+  dataToFetch =["title","description","img"]
+
+  user["title"]
+
+ */
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -88,6 +109,7 @@ export class UserComponent implements OnInit {
       this.users = resp;
       console.log(this.users);
       this.commonService.usersCountSubject.next(this.users.length);
+      
     },err=>{
 
     }

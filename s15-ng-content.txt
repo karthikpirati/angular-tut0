@@ -1,0 +1,45 @@
+Angular ng-content and Content Projection: 
+--------------------------------------------
+
+A Complete Guide - How To Use ng-content To Improve Component API Design
+
+
+One of the Angular features that help us the most in building reusable components is Content Projection 
+and ng-content.
+
+the post is as much about component design as it's about content projection!
+
+In order to learn content projection, let's use it build a small component (a Font Awesome Input Box).
+
+We are going to see how content projection works, 
+when to use it and why, and how it can improve a lot the design of some of our components.
+
+What Problem is Content Projection Trying to Solve?
+---------------------------------------------------
+Let's start at the beginning: in order to understand content projection, 
+we need to first understand what set of problems is the feature trying to solve.
+
+This is the best way to make sure that we will not misuse the feature as well!
+ So let's implement a small component without using content projection, and see what problems we run into.
+
+
+ What We Are About To Build:
+ ---------------------------------
+Our Font Awesome Input Box component is designed to look and feel just like a plain HTML Input, 
+except that it has a small Icon inside the text box.
+
+The icon can be any of the icons available in the Font Awesome open source version, 
+let's have a look at the component!
+
+Encapsulating a common HTML Pattern
+Adding an icon inside an input box is a very common HTML pattern that makes the input
+ much easier to identify by the user. 
+For example, have a look at the following text boxes:
+
+consider s15.1 png
+
+
+How Does This Component Work?
+As we know, normal HTML inputs cannot display an image. 
+But this component does look like a native input, 
+xas it also has a blue focus border and supports Tab/ Shift-Tab.

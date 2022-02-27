@@ -1,0 +1,15 @@
+/*
+    Decorators does not belong to Angular
+    they belong to typescript
+    decorator is just a function
+
+    Decorators is like java annotation can be applied on top of class,property and method
+
+    Decorators 
+
+
+npm install ngx-cookie-service --save
+import { CookieService } from 'ngx-cookie-service';
+
+
+*/

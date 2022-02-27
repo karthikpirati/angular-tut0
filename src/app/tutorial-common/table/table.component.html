@@ -24,6 +24,28 @@
 
 </table>
 
+
+
+
+<!-- reusable table 
+
+    <thead>
+    <tr *ngFor="let header of headerData">
+        <td >
+            {{header}}
+        </td>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let user of data">
+        <td *ngFor="let propety of dataToFetch">
+            {{user[property]}}
+        </td>
+    </tr>
+</tbody>
+
+-->
+
 <!-- <mat-table [dataSource]="userDataSource">
    <ng-container matColumnDef="firstName">
         <mat-header-cell *matHeaderCellDef>FirstName</mat-header-cell>

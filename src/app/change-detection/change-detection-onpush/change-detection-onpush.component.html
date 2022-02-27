@@ -1,0 +1,26 @@
+<p>change-detection-onpush works!</p>
+
+<p>OnPush With Async</p>
+<div *ngIf="(firstName$ | async);let user">AsynPipe {{user.firstName}}</div>
+<p>OnPush With Http subcsribe</p>
+<div>{{firstName}}</div>
+
+<p>OnPush With Math.Random</p>
+<div>{{num}}</div>
+
+<p>dataReceivedFromChildThroughEmitter</p>
+<div>{{dataReceivedFromChildThroughEmitter}}</div>
+
+<div>
+<input type="text" name="test" [formControl]="name" />
+<div>
+<button (click)="testAsync()">TestAsync</button>
+</div>
+<div>
+<button (click)="test()">Test</button>
+</div>
+</div>
+
+
+
+<app-change-detection-onpush-child (onPushWithEmit)="onPushWithEmit($event)"></app-change-detection-onpush-child>

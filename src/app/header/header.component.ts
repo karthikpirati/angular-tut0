@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { AuthenticationService } from '../services/authentication.service';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,10 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private commonService : CommonService) { }
 
   ngOnInit(): void {
+    this.commonService.usersCount$.subscribe();
   }
 
 
@@ -43,6 +46,7 @@ export class HeaderComponent implements OnInit {
         {path : 'observables' , displayName : "Observables"},
         {path : 'subject' , displayName : "Subject"},
         {path : 'operators' , displayName : "Operator"},
+        {path : 'mappingoperators' , displayName : "MappingOperators"},
       ]
     },
     {
@@ -62,6 +66,13 @@ export class HeaderComponent implements OnInit {
       mainMenu : 'fileupload',
       subMenus : [
         {path : 'fileupload' , displayName : "File Upload"}
+      ]
+    },
+    {
+      mainMenu : 'Angular Templates',
+      subMenus : [
+        {path : 'ngtemplate' , displayName : "ng-tempate"},
+        {path : 'ngtemplateoutlet' , displayName : "ng-tempate-outlet"},
       ]
     }
   ]

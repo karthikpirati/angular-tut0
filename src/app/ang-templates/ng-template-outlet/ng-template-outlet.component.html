@@ -1,0 +1,78 @@
+<!-- <h1>Dynamic Template Creation with the ngTemplateOutlet directive</h1>
+
+<b>By using ngTemplateOutlet we can reuse same template multiple times in same page </b>
+<b>We can also take the template itself and instantiate it anywhere on the page, using the ngTemplateOutlet directive:</b>
+
+<ng-container [ngTemplateOutlet]="display" [ngTemplateOutletContext]="{lessons : lessons}"></ng-container>
+
+<div>Display something</div>
+
+<b>Creeate Template Here for second time</b>
+<ng-container [ngTemplateOutlet]="display" [ngTemplateOutletContext]="{lessons : lessons}"></ng-container>
+
+
+ng-template-outlet.component.html
+<b>Ng Template by default load anything until it is created by ngIf or NgTemplateOutlet</b>
+<ng-template #display let-lessons="lessons">
+    <p>Inside Template Reference</p>
+    <div *ngFor="let lesson of lessons">
+        {{lesson}}
+    </div>
+</ng-template>
+
+ng-template-outlet.component.ts :
+
+lessons = ['ng-temlate','ng-template-outlet']
+
+
+
+Configurable Components with Template Partial:
+--------------------------------------------------
+
+by using this we can pass template from parent to child and display it
+
+parent:
+
+@Component({
+    selector: 'app-root',
+    template: `      
+  <ng-template #customTabButtons>
+      <div class="custom-class">
+          <button class="tab-button" (click)="login()">
+            {{loginText}}
+          </button>
+          <button class="tab-button" (click)="signUp()">
+            {{signUpText}}
+          </button>
+      </div>
+  </ng-template>
+  <tab-container [headerTemplate]="customTabButtons"></tab-container>      
+  `})
+  export class AppComponent implements OnInit {
+  
+  }
+
+
+  child:
+
+  @Component({
+    selector: 'tab-container',
+    template: `
+    
+<ng-template #defaultTabButtons>
+    
+    <div class="default-tab-buttons">
+        ...
+    </div>
+    
+</ng-template>
+<ng-container 
+  *ngTemplateOutlet="headerTemplate ? headerTemplate: defaultTabButtons">
+    
+</ng-container>
+... rest of tab container component ...
+`})
+export class TabContainerComponent {
+    @Input()
+    headerTemplate: TemplateRef<any>;
+} -->

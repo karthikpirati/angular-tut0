@@ -1,0 +1,19 @@
+<p>ng-template works!</p>
+
+
+<b>Below template will not render anything in UI</b>
+<ng-template>
+    <button class="tab-button" 
+                  (click)="login()">{{loginText}}</button>
+          <button class="tab-button" 
+                  (click)="signUp()">{{signUpText}}</button>
+</ng-template>
+
+<div *ngIf="lessons else loading">
+    <div>After data loaded</div>
+</div>
+
+
+<ng-template #loading>
+    <div>Loading...</div>
+</ng-template>

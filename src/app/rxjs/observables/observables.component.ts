@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-observables',
@@ -7,8 +8,9 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
   styleUrls: ['./observables.component.css']
 })
 export class ObservablesComponent implements OnInit {
+  ct: number ;
 
-  constructor() { }
+  constructor(private commonService : CommonService) { }
 
   counterSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   counterObservable$: Observable<number>;
@@ -16,6 +18,7 @@ export class ObservablesComponent implements OnInit {
   count: number = 0;
 
   ngOnInit(): void {
+    this.ct = this.commonService.getCount();
   }
 
 
@@ -49,9 +52,18 @@ export class ObservablesComponent implements OnInit {
      This subscriber function/publisher function is function which accepts observer object as an argument and 
     pushes new notification to observer by call next call back of observer.
 
+
      Example : 
     // subscriber function/publisher function 
     // which pushes new data to each observer/follower/subscriber by call next callback function
+    {
+      next : ()=> {
+
+      },
+      err : ()=>{
+
+      }
+    }
     subscriberFunction(observer){
       observer.next("new video/new tweet");
     }
@@ -101,7 +113,7 @@ export class ObservablesComponent implements OnInit {
 
     const observable = new Observable(subscriberFunction)
 
-    Note : Each Observer binds to one subscriberFunction/publisher that contains code push some kind of data
+    Note : Each Observer binds to one subscriberFunction/publisher that contains code to push some kind of data
     
     
     now observerable object internally stores this subscriberFunction/publisher function 
@@ -148,6 +160,7 @@ export class ObservablesComponent implements OnInit {
       error : err => console.log("Observer 1 -  got an error : "+err),
       complete : () => console.log('Observer 1 -  completed')
     }
+    
 
     console.log("calling sequenceSubscriber")
     const sequenceObservable = this.sequenceSubscriber();
@@ -229,6 +242,7 @@ export class ObservablesComponent implements OnInit {
     return new Observable(this.countPublisher);
   }
  
+  //subFunction 
   countPublisher(observer){
     let i:number;
     for(i=1;i<5;i++){
@@ -279,7 +293,7 @@ export class ObservablesComponent implements OnInit {
   with an observer that logs the received message to the console:
   */
  howObservableWorks2() {
-  const myObservable = of(1, 2, 3);
+  const myObservable = of(1, 2, 3); // new Obverable and obs.next(1,2,4)
 
   const myObserver = {
     next: x => console.log(x),

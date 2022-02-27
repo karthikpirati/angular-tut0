@@ -18,6 +18,9 @@ import { FooterComponent } from './footer/footer.component';
 import { MaterialModule } from './material/material.module';
 import { UsersModule } from './users/users.module';
 import { TutorialCommonModule } from './tutorial-common/tutorial-common.module';
+import { CommonService } from './services/common.service';
+import { ChangeDetectionModule } from './change-detection/change-detection.module';
+import { AngTemplatesModule } from './ang-templates/ang-templates.module';
 
 @NgModule({
   declarations: [
@@ -41,9 +44,11 @@ import { TutorialCommonModule } from './tutorial-common/tutorial-common.module';
     BrowserAnimationsModule,
     MaterialModule,
     UsersModule,
-    TutorialCommonModule
+    TutorialCommonModule,
+    ChangeDetectionModule,
+    AngTemplatesModule
   ],
-  providers: [],
+  providers: [CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

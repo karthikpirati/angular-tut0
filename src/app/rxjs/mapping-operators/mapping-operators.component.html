@@ -1,0 +1,20 @@
+<p>mapping-operators works!</p>
+
+<!-- 
+<mat-form-field appearance="legacy">
+    <mat-label>Legacy form field</mat-label>
+    <input matInput placeholder="Placeholder">
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+</mat-form-field> -->
+
+<div [formGroup]="autocompleteForm">
+<input type="text" name="search" formControlName="value"/>
+</div>
+
+<div *ngFor="let val of searchResults">
+    {{
+        val.email
+    }}
+</div>
+

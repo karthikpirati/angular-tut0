@@ -28,6 +28,13 @@ export class TableComponent implements OnInit,OnChanges {
   @Output() deleteUser = new EventEmitter();
   @Output() editUser = new EventEmitter();
 
+  /*
+    @Input() data:any;
+     @Input() headerData:any;
+     @Input() dataToFetch:any;
+
+  */
+
   //userDataSource : MatTableDataSource<User> =  new MatTableDataSource([]);
 
   //displayedColumns : string[] = ['firstName','lastName','email','mobileNo','actions']

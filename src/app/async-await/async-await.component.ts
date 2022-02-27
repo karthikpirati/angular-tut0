@@ -1,3 +1,4 @@
+import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../services/common.service';
 import { PromiseService } from '../services/promise.service';
@@ -12,7 +13,7 @@ export class AsyncAwaitComponent implements OnInit {
   constructor( private promiseService : PromiseService) { }
 
   ngOnInit(): void {
-    this.getData();
+    //this.getData();
     this.getDatawithAysnAwait();
   }
 
@@ -68,3 +69,43 @@ export class AsyncAwaitComponent implements OnInit {
   }
 
 }
+
+/*
+{
+  //database
+
+  products : ["produc1","produc1","produc1"] this.http.post('http://loac:909/prodcuts1').promise()
+  products2 : [] this.http.post('http://loac:909/prodcuts2').promise()
+
+
+
+  searchData = {
+    product1 : '',
+    pordcut2 : ''
+  }
+
+  this.http.post(searchData).sub();
+
+
+}
+
+
+  async prepareSearchData(){
+   
+    const listOfProducts1 = await his.getProducts();
+    const listOfProducts2 = await his.getProducts();
+
+    searchData = {
+    product1 : '',
+    pordcut2 : ''
+  }
+
+    this.http.post
+
+
+  }
+
+*/
+
+
+

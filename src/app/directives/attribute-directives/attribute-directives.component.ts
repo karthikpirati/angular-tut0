@@ -35,8 +35,13 @@ export class AttributeDirectivesComponent implements OnInit {
   }
 
 
-  getClasses(){
-    return 'main-block main-block-color';
-  }
+  // getClasses(){
+  //   // return 'main-block main-block-color';
+  //   if(){
+  //     return 'main-block-font'
+  //   }else{
+  //     return '.main-block'
+  //   }
+  // }
 
 }

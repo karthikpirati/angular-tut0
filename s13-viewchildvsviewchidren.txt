@@ -1,0 +1,168 @@
+Querying the DOM with @ViewChild and @ViewChildren:
+----------------------------------------------------
+
+
+DOM manipulation is responsible for modifying existing DOM elements and changing their current appearance or behavior. 
+You may also need to modify other crucial parts of an application, such as components, directives, 
+and other DOM elements. 
+Both ViewChild and ViewChildren are used to communicate between the components to access the data.
+
+
+@ViewChild and @ViewChildren are the types of decorators used to access the child component class
+ and its different properties into the parent component. It's similar to the inheritance.
+
+
+ example :
+
+ democomponent.component.html:
+<div>
+    This is {{ componentName }} component
+</div>
+
+ democomponent.component.ts :
+import { Component, OnInit, Input } from "@angular/core";
+
+@Component({
+  selector: "app-democomponent",
+  templateUrl: "./democomponent.component.html",
+  styleUrls: ["./democomponent.component.css"]
+})
+
+export class DemocomponentComponent implements OnInit {
+
+  // To get component name from app component
+  @Input() componentName: string;
+  constructor() {}
+}
+
+
+
+app.component.html
+
+<app-democomponent componentName="DEMO"></app-democomponent>
+
+
+app.component.ts:
+
+import { Component, ViewChild } from "@angular/core";
+import { DemocomponentComponent } from "./democomponent/democomponent.component";
+
+@Component({
+  selector: "my-app",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
+})
+
+export class AppComponent {
+  name = "Angular";
+
+  // Getting the reference
+  @ViewChild(DemocomponentComponent, { static: false }) hello: DemocomponentComponent;
+  ngAfterViewInit() {
+     console.log("Hello ", this.hello.componentName);
+  }
+}
+
+Notice that we have used ngAfterViewInit() hooks. 
+Why, you might ask? 
+When the application loads, the child element may not be loaded completely,
+ and if we try to access the component, it returns undefined. 
+To resolve this, we use the lifecycle hook, which allows us to access any element after the view is initialized.
+
+
+
+We can also access any specific element by using @ViewChild instead of referencing the whole component, 
+which we have done so far. Replace the code with the below code.
+
+app.component.html
+<div>
+ <button type="button" #myButton>My Button</button>
+</div>
+
+import { Component, ViewChild, ElementRef  } from "@angular/core";
+import { DemocomponentComponent } from "./democomponent/democomponent.component";
+
+
+app.component.ts
+
+@Component({
+  selector: "my-app",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
+})
+
+export class AppComponent {
+  name = "Angular";
+  // Getting the reference of the button control
+  @ViewChild("myButton", { static: false }) myButton: ElementRef;
+
+  ngAfterViewInit() {
+   console.log("Hello ", this.myButton.nativeElement);
+  }
+}
+
+
+What is @ViewChildren in Angular?
+Unlike @ViewChild, the @ViewChildren decorator is used to accessing multiple elements. 
+The response of the element list will always be a QueryList.
+
+The QueryList will always be updated whenever any child element added, updated, or removed from the HTML DOM tree.
+
+
+todo.compoent.html
+
+<div>
+    <h1> {{todoname}}!</h1> 
+</div>
+
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: "todo",
+  templateUrl: "./todo.compoent.html",
+  styleUrls: ["./todo.compoent.css"]
+})
+
+export class TodoComponent  {
+  @Input() todoname: string;
+}
+
+
+app.component.html
+
+<todo name="{{ name }}"></todo>
+
+<todo name="{{ name }}"></todo>
+
+<todo name="{{ name }}"></todo>
+
+
+app.component.ts
+
+import {
+ Component,
+ ViewChildren,
+ AfterViewInit,
+ QueryList
+} from "@angular/core";
+import { TodoComponent } from "./todo.component";
+
+@Component({
+ selector: "my-app",
+ templateUrl: "./app.component.html",
+ styleUrls: ["./app.component.css"]
+})
+
+export class AppComponent implements AfterViewInit {
+
+ name = "Angular";
+
+ // Accessing multiple native DOM elements using QueryList
+ @ViewChildren(TodoComponent) myValue: QueryList<TodoComponent>;
+
+ngAfterViewInit() {
+   console.log("Hello ", this.myValue.toArray());
+}
+
+}

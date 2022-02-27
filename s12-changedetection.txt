@@ -1,0 +1,104 @@
+
+changeDetection : ChangeDetectionStrategy.OnPush
+
+@Component({
+  selector: 'app-change-detection-onpush',
+  templateUrl: './change-detection-onpush.component.html',
+  styleUrls: ['./change-detection-onpush.component.css'],
+  changeDetection : ChangeDetectionStrategy.OnPush
+})
+
+
+
+OnPush :
+
+With onPush, Angular will only depend on the component’s inputs, events, markForCheck method, 
+or the use of the async pipe in the template, 
+to perform a change detection mechanism and update the view.
+
+
+events means any button clicks/typing something on input, changing dropdown value etc
+
+eg:
+
+num : number = 0;
+change-detection-onpush.component.ts : 
+    setInterval(()=>{
+      this.num = Math.random();
+    },1000)
+
+change-detection-onpush.component.html :
+
+<p>OnPush With Math.Random</p>
+<div>{{num}}</div>
+
+<div>
+<input type="text" name="test" [formControl]="name" />
+<button (click)="test()">Test</button>
+</div>
+
+
+I have adde timer which will change num valu for every 1 sec.
+If we observe by default we will not observe changes in UI.
+if we type someting in input box/button click this value will be changed
+
+
+
+Http calls :
+
+I am making http call and subscribing to the value and binding the result to  UI
+
+change-detection-onpush.component.ts :
+
+firstName : string = ''
+  test(){
+    console.log(this.name.value)
+    this.userService.findByEmail(this.name.value).subscribe(resp=>{
+      if(resp){
+        this.firstName = resp['firstName']
+      }
+    })
+  }
+
+
+change-detection-onpush.component.html
+
+
+<p>OnPush With Http subcsribe</p>
+<div>{{firstName}}</div>
+<button (click)="test()"></button>
+
+type email in text box and click on test button
+ a http call will be made to fetch user data by email id.
+ once we got response we are setting result to firstName property and binding result
+if we observe we will not see any firstName on UI because 
+ChangeDetectionStrategy.OnPush does not rerender view when local state/firstName modified
+
+let say we got result and firstName is 'John'
+
+Note : now change value in input field you will observe John in UI.
+means OnPush will rerender view if we make any eventts(input field change is also a event)
+or
+ instead of input field change click on test button again(also called event) 
+now onPush will rerender view again and you can see name John
+
+
+Async Pipe: OnPush rerenders view if you use async pipe
+ Same Example try with async pipe you will see firstName in UI
+
+ts:
+firstName$ : Observable<any> | null = null;
+  testAsync(){
+    console.log(this.name.value)
+    this.firstName$ = this.userService.findByEmail(this.name.value);
+  }
+
+html
+<p>OnPush With Async</p>
+<div *ngIf="(firstName$ | async);let user">AsynPipe {{user.firstName}}</div>
+
+
+
+onPush rerenders view if we are receiving data from child via event emitter:
+
+let say child send some data to parent via 

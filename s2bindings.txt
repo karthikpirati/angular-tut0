@@ -121,7 +121,8 @@ If we decide to use interpolation instead of property binding, the button will a
 
 2. Event Binding :
 
-All the user interactions with the application happen through clicks, double clicks, or hovering or maybe some key actions such as keypress, key up, or key down.
+All the user interactions with the application happen through clicks, double clicks,
+ or hovering or maybe some key actions such as keypress, key up, or key down.
 Generally, there will be the case where we will be calling some logic on these actions - that’s when event binding helps us.
 
 Event binding is the one-way data binding which sends the value from the view to the component, which is in contrast to the property binding where we used to send the data from component to the view.
@@ -144,11 +145,12 @@ on-: Append on- before the event and assign the method from the component which 
 3. Two-Way Binding :
 
  Two-way binding is the combination of property binding [] and event binding ()
- event binding () - will sends the data from UI(html) to component(ts)
- property binding - will sends the data from componets to html.
+ event binding () - the changes in UI will cause the change in value of property in ts file
+ property binding - this change to property in ts file will be reflected in UI
  
+ two way binding can be achieved by ngModel
  user.html
- <input type="text" name="username" [(ngModdel)]="username">
+ <input type="text" name="username" [(ngModel)]="username">
  
  <span>Hello! {{username}}</span>
  
